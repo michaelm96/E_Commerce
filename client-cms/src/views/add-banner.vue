@@ -1,0 +1,66 @@
+<template>
+  <div class="whiteTable">
+  <h1 class="title">Add Banner</h1>
+    <b-form @submit.prevent="onAdd" class="addForm">
+      <label for="name">Name:</label>
+      <input v-model="name" type="text" class="form-control" />
+      <p class="error" v-if="errMsg.name">
+          {{ this.errMsg.name }}
+      </p>
+      <label for="image">Image url:</label>
+      <input v-model="image" type="url" class="form-control" />
+      <p class="error" v-if="errMsg.image_url">
+          {{ this.errMsg.image_url }}
+      </p>
+      <br />
+      <br />
+      <b-button variant="success" class="addButton" type="submit">Add Banner</b-button>
+    </b-form>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: null,
+      image: null,
+      errMsg: '',
+    };
+  },
+  methods: {
+    async onAdd() {
+      await this.$store.dispatch('toAddBanner', {
+        name: this.name,
+        image_url: this.image,
+      });
+      if (this.$store.state.errMsg) {
+        this.errMsg = this.$store.state.errMsg;
+      } else {
+        this.$router.push('/banner');
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+.title{
+    text-align: center;
+}
+.addForm {
+  margin: auto 20rem;
+}
+.addButton {
+  margin: 0 10rem;
+}
+.error{
+    color: red;
+}
+.whiteTable{
+  background-color: white;
+  opacity: 0.88;
+  border-radius: 1.5rem;
+  padding: 1rem;
+}
+</style>

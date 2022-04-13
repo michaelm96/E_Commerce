@@ -4,6 +4,9 @@ customer site
 * RESTful endpoint for E-commerce CRUD operation
 * JSON formatted response
 
+## URL
+https://e-commerce-m96.web.app/
+
 ## RESTful endpoints
 ### POST /register
 
